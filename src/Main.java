@@ -112,7 +112,7 @@ public class Main {
         System.out.println("%%%%%%%%%%%%%%%%%%%%%% Os top 3 vendedores %%%%%%%%%%%%%%%%%%%%%%");
         System.out.println();
         for(int i = 0; i < topvendedores.length; i++){
-            System.out.printf("%s, com exatas %d vendas.\n", topvendedores[i].toString(), topvendedores[i].getVendas());
+            System.out.printf("%s, do mercado de %s ,com exatas %d vendas.\n", topvendedores[i].toString(), mercados[i].getNome(), topvendedores[i].getVendas());
         }
     }
 
