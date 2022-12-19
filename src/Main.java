@@ -19,6 +19,7 @@ public class Main {
         Mercado mercadoFrutas = new Mercado(vendedoresFrutas, 450, "Frutas");
         Mercado mercadoRoupas = new Mercado(vendedoresRoupas, 680, "Roupas");
         Mercado mercadoJoias = new Mercado(vendedoresJoias, 800, "Joias");
+        Mercado[] mercados = new Mercado[]{mercadoFrutas, mercadoRoupas, mercadoJoias};
 
         Comprador comprador = new Comprador();
         Regulador regulador = new Regulador();
@@ -34,6 +35,9 @@ public class Main {
         sumario(mercadoFrutas);
         sumario(mercadoRoupas);
         sumario(mercadoJoias);
+
+        topMercado(mercados);
+        topVendedores(mercados);
     }
 
     private static void newVendedores(String[] nomes, String[] sobrenomes, Vendedores[] vendedorX, Random random){
@@ -80,5 +84,51 @@ public class Main {
 
         System.out.println(" ");
     }
+
+    private static void topMercado(Mercado[] mercados){
+        int aux = 0;
+        int top = 0;
+
+        for(int i = 0; i < mercados.length; i++){
+            if(mercados[i].getTotalVendas() > aux){
+                top = i;
+                aux = mercados[i].getTotalVendas();
+            }
+        }
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Mercado mais rentável %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println();
+        System.out.printf("O mercado mais rentável foi o Mercado de %s", mercados[top].getNome());
+        System.out.println(" ");
+    }
+
+    private static void topVendedores(Mercado[] mercados){
+        Vendedores topvendedores[] = new Vendedores[3];
+
+        for(int i = 0; i < mercados.length; i++){
+            topvendedores[i] = comparar(mercados[i]);
+        }
+
+        System.out.println();
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%% Os top 3 vendedores %%%%%%%%%%%%%%%%%%%%%%");
+        System.out.println();
+        for(int i = 0; i < topvendedores.length; i++){
+            System.out.printf("%s, com exatas %d vendas.\n", topvendedores[i].toString(), topvendedores[i].getVendas());
+        }
+    }
+
+    private static Vendedores comparar(Mercado mercado){
+        int aux = 0;
+        int top = 0;
+
+        for(int i = 0; i < mercado.getVendedores().length; i++){
+            if(mercado.getVendedores()[i].getVendas() > aux){
+                top = i;
+                aux = mercado.getVendedores()[i].getVendas();
+            }
+        }
+        return mercado.getVendedores()[top];
+    }
+
+
 
 }
